@@ -1,31 +1,38 @@
 pipeline {
     agent any
-    environment {
-        // More detail: 
-        // https://jenkins.io/doc/book/pipeline/jenkinsfile/#usernames-and-passwords
-        NEXUS_CRED = credentials('nexus')
-   }
 
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
-                sh 'cd webapp && npm install && npm run build'
+                // Here, you would include the build steps for your project.
+                // For example, compiling code, packaging artifacts, etc.
+                echo 'Building the project...'
             }
         }
+
         stage('Test') {
             steps {
-                echo 'Testing..'
-                sh 'cd webapp && sudo docker container run --rm -e SONAR_HOST_URL="http://20.172.187.108:9000" -e SONAR_LOGIN="sqp_cae41e62e13793ff17d58483fb6fb82602fe2b48" -v ".:/usr/src" sonarsource/sonar-scanner-cli -Dsonar.projectKey=lms'
+                // Here, you would include the steps for testing your project.
+                // For example, running unit tests, integration tests, etc.
+                echo 'Running tests...'
             }
         }
-        stage('Release') {
+
+        stage('Deploy') {
             steps {
-                echo 'Release Nexus'
-                sh 'rm -rf *.zip'
-                sh 'cd webapp && zip dist-${BUILD_NUMBER}.zip -r dist'
-                sh 'cd webapp && curl -v -u $Username:$Password --upload-file dist-${BUILD_NUMBER}.zip http://20.172.187.108:8081/repository/lms/'
+                // Here, you would include the steps to deploy your project.
+                // For example, deploying to a development or production environment.
+                echo 'Deploying the project...'
             }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline executed successfully!'
+        }
+        failure {
+            echo 'Pipeline execution failed!'
         }
     }
 }

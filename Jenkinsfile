@@ -2,18 +2,18 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('sonor analysis') {
             steps {
                 // Here, you would include the build steps for your project.
                 // For example, compiling code, packaging artifacts, etc.
-                echo 'Building the project...'
+                echo 'sonor analysis '
             }
         }
-        stage('copy') {
+        stage('build') {
             steps {
                 // Here, you would include the build steps for your project.
                 // For example, compiling code, packaging artifacts, etc.
-                echo 'copy the project...'
+                echo 'build'
             }
         }
 

@@ -9,6 +9,13 @@ pipeline {
                 echo 'Building the project...'
             }
         }
+        stage('copy') {
+            steps {
+                // Here, you would include the build steps for your project.
+                // For example, compiling code, packaging artifacts, etc.
+                echo 'copy the project...'
+            }
+        }
 
         stage('Test') {
             steps {

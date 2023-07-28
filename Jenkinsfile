@@ -14,6 +14,7 @@ pipeline {
                 // Here, you would include the build steps for your project.
                 // For example, compiling code, packaging artifacts, etc.
                 echo 'build'
+                sh 'npm install'
             }
         }
 
